@@ -1,15 +1,13 @@
 # CHIP 3.7: Wordguesser: a scaffolded (!) ESaaS getting-started assignment
 
-
 (v1.1, September 2015.  Written by Armando Fox and Nick Herson)
 (some edits by mverdicchio 21 September 2015)
-(refinements by Armando Fox September 2017)
+(refinements by Armando Fox, September 2017)
+(modified by Peter DePasquale, February 2026)
 
-In this assignment you'll be introduced to part of the basic cycle of creating SaaS in a disciplined way.
+In this assignment, you'll be introduced to part of the basic cycle of creating SaaS in a disciplined way.
 
-**NOTE: Do not clone this repo to your workspace. Fork it first, then clone your fork.**
-
-
+**NOTE: Before you begin, we need to "copy" this repo from this account to your GitHub account. When looking at the repo in GitHub, use the "Use this template" button and select the "Create a new repository" option. In the window that appears, ensure that the resulting copied repo will be in your account, and you should use the same name as this repo: hw-sinatra-saas-wordguesser. Provide a description if you like, but select the visibility to be Private. Then, on your local machine, clone your repo and do your work there on your local machine.**
 
 Learning Goals
 --------------
@@ -23,22 +21,22 @@ After completing this assignment, you will be able to:
 
 Prerequisites
 -------------
-* You should be familiar with Ruby basics, for example by completing the Ruby Intro or Ruby Calisthenics assignment.
-* You should have read [ESaaS](http://www.saasbook.info) Chapter 2, "The Architecture of SaaS Applications", and watched the accompanying videos in the [MOOC](http://www.saas-class.org).
-* You should be comfortable with basic Git usage and how to push your code to GitHub, as described in Appendix A of [ESaaS](http://www.saasbook.info).
+* You should be familiar with Ruby basics, for example, by completing the Ruby Intro or Ruby Calisthenics assignment (CHIP 2.5)
+* You should have read [ESaaS](http://www.saasbook.info) Chapter 2, "The Architecture of SaaS Applications".
+* You should be comfortable with basic Git usage and how to push your code to GitHub.
 * You will need "survival level" Unix command-line skills and facility with an editor to edit code files.
 
 **NOTE: You may find the [Sinatra documentation](https://sinatrarb.com) helpful to have on hand.**
 
 Introduction
 ------------
-The full Agile/XP cycle we follow in ESaaS includes talking to the customer, using BDD to develop scenarios, turning those scenarios into runnable integration/acceptance tests with Cucumber, using those scenarios plus TDD to drive the creation of actual code, and deploying the result of each iteration's work to the cloud.
+The full Agile/XP cycle we follow in ESaaS includes talking to the customer, using BDD to develop scenarios, turning those scenarios into runnable integration/acceptance tests with [Cucumber](https://cucumber.io/), using those scenarios plus TDD to drive the creation of actual code, and deploying the result of each iteration's work to the cloud.
 
-In this introductory assignment, we've provided RSpec unit tests to let you use TDD to develop game logic for a word-guessing game.  In the full Agile/XP cycle, you'd develop these tests yourself as you code.
+In this introductory assignment, we've provided [RSpec](https://rspec.info/) unit tests to let you use TDD to develop game logic for a word-guessing game. In the full Agile/XP cycle, you'd develop these tests yourself as you code.
 
-You'll then use the Sinatra framework to make the Wordguesser game available as SaaS. Adapting the game logic for SaaS will introduce you to thinking about RESTful routes and service-oriented architecture. As you develop the "SaaS-ified" Wordguessing game, you'll use Cucumber to describe how gameplay will work from the player's point of view and as "full stack" integration tests that will drive SaaS development.  In the full Agile/XP cycle, you'd develop Cucumber scenarios yourself based on consultation with the customer, and create the necessary *step definitions* (Cucumber code that turns plain-English scenarios into runnable tests).  In this assignment we provide both the scenarios and step definitions for you.
+You'll then use the Sinatra framework to make the Wordguesser game available as SaaS. Adapting the game logic for SaaS will introduce you to thinking about RESTful routes and service-oriented architecture. As you develop the "SaaS-ified" Wordguessing game, you'll use Cucumber to describe how gameplay will work from the player's point of view and as "full stack" integration tests that will drive SaaS development.  In the full Agile/XP cycle, you'd develop Cucumber scenarios yourself based on consultation with the customer, and create the necessary *step definitions* (Cucumber code that turns plain-English scenarios into runnable tests). In this assignment, we provide both the scenarios and step definitions for you.
 
-You'll deploy your game to the cloud using Heroku, giving you experience in automating SaaS deployment.
+You'll deploy your game to the cloud using [Heroku](https://www.heroku.com/), giving you experience in automating SaaS deployment.
 
 **Why Sinatra?**
 
