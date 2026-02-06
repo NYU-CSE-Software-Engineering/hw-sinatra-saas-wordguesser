@@ -7,7 +7,7 @@
 
 In this assignment, you'll be introduced to part of the basic cycle of creating SaaS in a disciplined way.
 
-**NOTE: Before you begin, we need to "copy" this repo from this account to your GitHub account. When looking at the repo in GitHub, use the "Use this template" button and select the "Create a new repository" option. In the window that appears, ensure that the resulting copied repo will be in your account, and you should use the same name as this repo: hw-sinatra-saas-wordguesser. Provide a description if you like, but select the visibility to be Private. Then, on your local machine, clone your repo and do your work there on your local machine.**
+[//]: # (**NOTE: Before you begin, we need to "copy" this repo from this account to your GitHub account. When looking at the repo in GitHub, use the "Use this template" button and select the "Create a new repository" option. In the window that appears, ensure that the resulting copied repo will be in your account, and you should use the same name as this repo: hw-sinatra-saas-wordguesser. Provide a description if you like, but select the visibility to be Private. Then, on your local machine, clone your repo and do your work there on your local machine.**)
 
 Learning Goals
 --------------
@@ -44,7 +44,7 @@ This assignment uses the simple [Sinatra](https://github.com/sinatra/sinatra) fr
 
 Contents
 ---------
-
+* [Setting up your environment](docs/setup.md)
 * Part 0: [Demystifying SaaS app creation](docs/part_0_create_saas_app.md)
 * Part 1: [Wordguesser](docs/part_1_wordguesser.md)
 * Part 2: [RESTful thinking for Wordguesser](docs/part_2_restful_thinking.md)
