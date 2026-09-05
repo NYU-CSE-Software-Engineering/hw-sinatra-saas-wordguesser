@@ -4,5 +4,10 @@ RUN gem install bundler
 
 WORKDIR /app
 
-# Default to the interactive bash shell
-CMD ["/bin/bash"]
+COPY Gemfile Gemfile.lock* ./
+
+RUN bundle install
+
+COPY . .
+
+CMD ["bundle", "exec", "rackup", "-p", "3000", "-o", "0.0.0.0"]
