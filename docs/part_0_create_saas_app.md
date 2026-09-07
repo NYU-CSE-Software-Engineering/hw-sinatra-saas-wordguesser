@@ -261,10 +261,13 @@ Modify `app.rb` to print a different message, and verify that the change is dete
 tab with the running app.  Also, before we move on, you should commit your latest changes to git.
 
 ## Create a GitHub repository
-:exclamation: **TODO:** Complete these instructions! :exclamation:
+We're now at a point where we can/should put our project on GitHub. We should be in a "clean" state, where all of our recent changes are committed, and we have a working application (though it does not do much). Follow [these GitHub directions to create a new repository](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git) on GitHub, and then push your code to that new repository. Be sure to create your repository as **private** when creating it.
 
 ## Create a GitHub Personal Access Token
-:exclamation: **TODO:** Complete these instructions! :exclamation:
+You also need to create a GitHub (fine-grained) Personal Access Token for Osiris to be able to read from your private repository. Osiris won't need your GitHub password, so the token will provide access to the repo for deployment. Follow [these GitHub directions to create a new fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). Be sure to only grant token access to your new repo, and add just the `Contents` permission (read-only).
+
+> [!WARNING]
+> Personal access tokens, when combined with repository URLs, act as passwords. Never share your token!
 
 ## Deploy to Osiris
 The Offensive Security, Incident Response, and Internet Security (OSIRIS) laboratory is a student-run cybersecurity research lab where students analyze and understand how attackers take advantage of real systems.[^1] The Osiris team has developed a deployment platform (a Platform-as-a-Service, or PaaS) system to support our deployment and execution of our web applications. In order to deploy, you will need to:
