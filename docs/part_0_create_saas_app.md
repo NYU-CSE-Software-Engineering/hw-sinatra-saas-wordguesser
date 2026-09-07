@@ -116,13 +116,13 @@ comment in the quotes. You can repeat these commands to commit future changes. R
 
 <details>
   <summary>What's the difference between the purpose and contents of <code>Gemfile</code> and <code>Gemfile.lock</code>?  Which file is needed to completely reproduce the development environment's gems in the production environment?</summary>
-  <p><blockquote><code>Gemfile</code> specifies the gems you need and in some cases the constraints on which version(s) are acceptable. <code>Gemfile.lock</code> records the *actual* versions found, not only of the gems you specified explicitly but also any other gems on which they depend, so it is the file used by the production environment to reproduce the gems available in the development environment.</blockquote></p>
+  <p><blockquote><code>Gemfile</code> specifies the gems you need and, in some cases, the constraints on which version(s) are acceptable. <code>Gemfile.lock</code> records the *actual* versions found, not only of the gems you specified explicitly but also any other gems on which they depend, so it is the file used by the production environment to reproduce the gems available in the development environment.</blockquote></p>
 </details>
 <br />
 <details>
   <summary>After running <code>bundle</code>, why are there gems listed in <code>Gemfile.lock</code>
 that were not listed in <code>Gemfile</code>?</summary>
-  <p><blockquote>Bundler looked up the information for each Gem you requested (in this case, <code>sinatra</code>, <code>rackup</code>, and <code>webrick</code>) and realized that it depends on other gems, which in turn depend on still others, so it recursively installed all those dependencies.  For example, the <code>rack</code> appserver is a gem, and while you didn't explicitly request it, <code>sinatra</code> depends on it.  This is an example of the power of automation: rather than requiring you (the app developer) to understand every Gem dependency, Bundler automates that process and lets you focus only on your app's top-level dependencies.</blockquote></p>
+  <p><blockquote>Bundler looked up the information for each Gem you requested (in this case, <code>sinatra</code>, <code>rackup</code>, and <code>webrick</code>) and realized that it depends on other gems, which in turn depend on still others, so it recursively installed all those dependencies.  For example, the <code>rack</code> app server is a gem, and while you didn't explicitly request it, <code>sinatra</code> depends on it.  This is an example of the power of automation: rather than requiring you (the app developer) to understand every Gem dependency, Bundler automates that process and lets you focus only on your app's top-level dependencies.</blockquote></p>
 </details>
 
 Create a simple SaaS app with Sinatra
@@ -245,19 +245,42 @@ Return to the Docker shell window and start your app to verify the app is runnin
 `bundle exec rerun -- rackup --port 3000 -o 0.0.0.0`
 
 There are more details on `rerun`'s usage available in the gem's [GitHub README](https://github.com/alexch/rerun#usage). Gems are usually on
-GitHub and their READMEs are usually full of helpful instructions about how to use them.
+GitHub, and their READMEs are usually full of helpful instructions about how to use them.
 
-In this case, we are prefixing with `bundle exec` again in order to ensure we are using the gems in the Gemfile.lock, 
-and the `--` symbol is there to assert that the command we want `rerun` to operate with is `rackup -p 3000 -o 0.0.0.0`.  
-We could achieve the same effect with `bundle exec rerun "rackup -p 3000 -o 0.0.0.0"`. They are equivalent.
-More importantly, any detected changes will now cause the server to restart automatically, similar to the use 
-of `guard` to auto re-run specs when files change. (**Note: we have had reports of Windows users that don't seem to have
-success with the `rerun` command reloading the application. If you experience this, please try using:
-`bundle exec rerun --force-polling 'bundle exec rackup -p 3000 -o 0.0.0.0'`, which will periodically restart the server 
-every few seconds to check for a filesystem change.)**
+In this case, we are prefixing with `bundle exec` again to ensure we are using the gems in the Gemfile.lock, 
+and the `--` symbol is there to assert that the command we want `rerun` to operate with is `rackup -p 3000 -o 0.0.0.0`. We could achieve the 
+same effect with `bundle exec rerun "rackup -p 3000 -o 0.0.0.0"`. They are equivalent. More importantly, any detected changes will now cause 
+the server to restart automatically, similar to the use of `guard` to auto-rerun specs when files change.
+
+> [!NOTE]
+> We have had reports of Windows users who don't seem to have success with the `rerun` command reloading the application. If you
+> experience this, please try using: `bundle exec rerun --force-polling 'bundle exec rackup -p 3000 -o 0.0.0.0'`, which will periodically
+> restart the server every few seconds to check for a filesystem change.
 
 Modify `app.rb` to print a different message, and verify that the change is detected by refreshing your browser 
 tab with the running app.  Also, before we move on, you should commit your latest changes to git.
+
+## Create a GitHub repository
+:exclamation: **TODO:** Complete these instructions! :exclamation:
+
+## Create a GitHub Personal Access Token
+:exclamation: **TODO:** Complete these instructions! :exclamation:
+
+## Deploy to Osiris
+The Offensive Security, Incident Response, and Internet Security (OSIRIS) laboratory is a student-run cybersecurity research lab where students analyze and understand how attackers take advantage of real systems.[^1] The Osiris team has developed a deployment platform (a Platform-as-a-Service, or PaaS) system to support our deployment and execution of our web applications. In order to deploy, you will need to:
+
+1. Ensure you have logged in to a web browser using your NYU credentials, and then have visited the following site: [https://deploy.osiris.cyber.nyu.edu/](https://deploy.osiris.cyber.nyu.edu/)
+2. When prompted, enter the Join Code provided by your instructor to ensure that you join the correct "course" in Osiris
+3. Select the *Deploy* menu item from the top navigation bar. You should see:
+![Screenshot of the Osiris deployment window.](docs/osirius_deploy.png)
+4. Select your course and assignment.
+5. Leave the git ref as `main` (that's the name of the git branch you wish to deploy), and change the port number to 3000.
+6. Enter the URL of the GitHub repo that you just created above. Note that as a private repo, you will need to generate a GitHub Personal Access Token for Osiris to access your private repo.
+Public repos do not require a token. Be sure to enter the URL of the private repo with the token preceding the `github.com` part.  For example: `https://github_personal_token@github.com:/github_username/github_reponame`
+7. Finally, hit the *Build and Deploy* button and see what happens. If all goes well, in a few minutes or less, you will see a URL that you can use in a web browser to acesss your web application.
+8. If this did not work or there were issues, check your work and possibly get help from the course staff.
+
+[^1]:See [https://osiris.cyber.nyu.edu/](https://osiris.cyber.nyu.edu/)
 
 ## Deploy to Heroku
 
