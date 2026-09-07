@@ -3,6 +3,9 @@
 ARG RUBY_VERSION=3.3.8
 FROM registry.docker.com/library/ruby:$RUBY_VERSION-slim AS base
 
+ARG BUNDLER_VERSION=4.0.6
+RUN gem install bundler -v "$BUNDLER_VERSION"
+
 # Set a standard absolute working directory
 WORKDIR /app
 
