@@ -26,9 +26,8 @@ RUN apt-get update -qq && \
 COPY Gemfile Gemfile.lock ./
 RUN bundle install
 
-# Copy application code
-COPY . .
-
+COPY app.rb config.ru ./
+COPY lib views ./
 # Final stage for app image
 FROM base
 
