@@ -77,7 +77,7 @@ The create-new-game code in the Sinatra app should do the following:
 
 View how these steps are actualized in the app.rb file under the `post /create do` route.
 
-Now stage and commit all files locally, then `git push heroku main` to deploy to Heroku again and manually verify this improved behavior.
+Now stage and commit all files locally, push those changes to GitHub, and then deploy to Osiris again and manually verify this improved behavior. Ensure that your prior deployment(s) on Osiris have all been spun down before deploying again.
 
 #### Self Check Question
 
