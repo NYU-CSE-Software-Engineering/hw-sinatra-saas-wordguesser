@@ -280,7 +280,7 @@ The Offensive Security, Incident Response, and Internet Security (OSIRIS) labora
 5. Leave the git ref as `main` (that's the name of the git branch you wish to deploy), and change the port number to 3000.
 6. Enter the URL of the GitHub repo that you just created above. Note that as a private repo, you will need to generate a GitHub Personal Access Token for Osiris to access your private repo.
 Public repos do not require a token. Be sure to enter the URL of the private repo with the token preceding the `github.com` part.  For example: `https://github_personal_token@github.com:/github_username/github_reponame`
-7. Finally, hit the *Build and Deploy* button and see what happens. If all goes well, in a few minutes or less, you will see a URL that you can use in a web browser to acesss your web application.
+7. Finally, hit the *Build and Deploy* button and see what happens. If all goes well, in a few minutes or less, you will see a URL that you can use in a web browser to access your web application.
 8. If this did not work or there were issues, check your work and possibly get help from the course staff.
 
 [^1]:See [https://osiris.cyber.nyu.edu/](https://osiris.cyber.nyu.edu/)
