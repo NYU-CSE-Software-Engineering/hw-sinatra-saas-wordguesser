@@ -52,7 +52,7 @@ As before, run the shell command `bundle exec rackup --port 3000 -o 0.0.0.0` to 
 
 Visit this URL and verify that the Start New Game page appears.
 
-#### Self-Check Question
+#### Self Check Question
 
 <details>
   <summary>Where is the HTML code for this page?</summary>
