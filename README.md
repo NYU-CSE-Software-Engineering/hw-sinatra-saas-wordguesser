@@ -51,4 +51,3 @@ Contents
 * Part 4: [Introducing Cucumber](docs/part_4_cucumber.md)
 * Part 5: [Corner Cases](docs/part_5_corner_cases.md)
 * Part 6: [Conclusion](docs/part_6_conclusion.md)
-* Part 7: [Optional Challenge Assignment](docs/part_7_optional_challenge.md)
