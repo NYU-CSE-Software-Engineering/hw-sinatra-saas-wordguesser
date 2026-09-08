@@ -275,7 +275,7 @@ The Offensive Security, Incident Response, and Internet Security (OSIRIS) labora
 1. Ensure you have logged in to a web browser using your NYU credentials, and then have visited the following site: [https://deploy.osiris.cyber.nyu.edu/](https://deploy.osiris.cyber.nyu.edu/)
 2. When prompted, enter the Join Code provided by your instructor to ensure that you join the correct "course" in Osiris
 3. Select the *Deploy* menu item from the top navigation bar. You should see:
-![Screenshot of the Osiris deployment window.](osirius_deploy.png)
+   ![Screenshot of the Osiris deployment window.](osirius_deploy.png)
 4. Select your course and assignment.
 5. Leave the git ref as `main` (that's the name of the git branch you wish to deploy), and change the port number to 3000.
 6. Enter the URL of the GitHub repo that you just created above. Note that as a private repo, you will need to generate a GitHub Personal Access Token for Osiris to access your private repo.
