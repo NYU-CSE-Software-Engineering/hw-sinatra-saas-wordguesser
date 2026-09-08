@@ -5,12 +5,12 @@ Part 0: Demystifying SaaS app creation
 depends on so that your production and development environments are as similar as possible.
 
 **What you will do:** Create a simple "hello world" app using the Sinatra framework, version it properly, and deploy 
-it to Heroku.
+it to Osiris.
 
 ## Creating and versioning a simple SaaS app
 
 SaaS apps are developed on your computer but *deployed to production* on a server that others can access.  We try to 
-minimize the differences between the development and production *environments*, to avoid difficult-to-diagnose problems 
+minimize the differences between the development and production *environments* to avoid difficult-to-diagnose problems 
 in which something works one way on your development computer but a different way (or not at all) when that code is 
 deployed to production.
 
@@ -54,7 +54,7 @@ versions of Sinatra.
 
 The fourth and fifth lines specify that we want to also include the [`rackup`](https://github.com/rack/rack) and 
 [`webrick`](https://github.com/ruby/webrick) gems.  These applications will help us deploy our application and provide
-us a web server to communicate with.
+us with a web server to communicate with.
 
 * Also in that directory, create a new file called `Dockerfile` (the capitalization here is also important) with the following
 contents. This will provide directions on how the Docker container will be constructed.
@@ -99,7 +99,7 @@ __mount__ them into the container. Thus, you can see them both inside and outsid
 Let's put these files under version control. We will issue the following `git` commands, but note that this needs to be 
 done in the shell that is running on the host computer, not the shell from the Docker container. Why? The running 
 container does not have the necessary `git` software installed, so issuing these commands in the container will not be
-successful. (Hint: keep your shells straight, it can be easy to confuse them!)
+successful. (Hint: keep your shells straight; it can be easy to confuse them!)
 
 To place under version control, use these commands:
 
@@ -184,7 +184,7 @@ looks only in standard system directories to find gems.
 
 You're now ready to test-drive our simple app with a command line: `bundle exec rackup --port 3000 -o 0.0.0.0`
 
-This command starts the Rack appserver and the WEBrick webserver. Prefixing it with `bundle exec` ensures that you are 
+This command starts the Rack app server and the WEBrick web server. Prefixing it with `bundle exec` ensures that you are 
 running with the gems specified in `Gemfile.lock`. Rack will look for `config.ru` and attempt to start our app based 
 on the information there.
 
@@ -202,7 +202,7 @@ to see the webapp. Verify that you can see "Hello World".
 
 You should now have the following files under version control: `Gemfile`, `Gemfile.lock`, `app.rb`, `config.ru`.  
 This is a minimal SaaS app: the app file itself, the list of explicitly required gems, the list of actual gems 
-installed, including the dependencies implied by the required gems, and a configuration file telling the appserver 
+installed, including the dependencies implied by the required gems, and a configuration file telling the app server 
 how to start the app.
 
 ## Modify the app
@@ -285,55 +285,10 @@ Public repos do not require a token. Be sure to enter the URL of the private rep
 
 [^1]:See [https://osiris.cyber.nyu.edu/](https://osiris.cyber.nyu.edu/)
 
-## Deploy to Heroku
+Enter that URL in a new browser tab to see your app running live. Congratulations, you did it—your app is live!
 
-Heroku is a cloud [platform-as-a-service](https://en.wikipedia.org/wiki/Platform_as_a_service) (PaaS) where we can deploy our Sinatra (and later Rails) applications. 
-If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the 
-next step.
-
-Install Heroku CLI on your host computer (not in the Docker container!) following their [instructions](https://devcenter.heroku.com/articles/heroku-cli).
-
-Log in to your Heroku account by typing the command: `heroku login -i` in the terminal. This will connect you to your 
-Heroku account.  (**Note: if your Heroku account has multifactor authentication enabled, use the Heroku Account settings
-to generate an API key. You can then use this key as your password when you log in.**)
-
-While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in 
-Heroku. This will tell the Heroku service to prepare for some incoming code, and locally it will add a remote git 
-repository for you called `heroku`.
-
-Next, make sure you stage and commit all changes locally as instructed above (i.e., `git add`, `git commit`, etc.).
-
-Earlier, we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` 
-to determine how to start your Sinatra app. How do you tell a production environment how to start an appserver or 
-other processes necessary to receive requests and start your app? In the case of Heroku, this is done with a special 
-file named `Procfile`, which specifies one or more types of Heroku processes your app will use, and how to start each 
-one. The most basic Heroku process type is called a Dyno, or "web worker". One Dyno can serve one user request at a 
-time. Let's create a file named `Procfile`, and only this as the name (i.e. `Procfile.txt` is not valid). Write the 
-following line in your `Procfile`:
-
-```
-web: bundle exec rackup config.ru -p $PORT
-```
-
-This tells Heroku to start a single web worker (Dyno) using essentially the same command line you used to start 
-Rack locally. Note that in some cases, a `Procfile` is not necessary since Heroku can infer from your files how to 
-start the app. However, it's always better to be explicit.
-
-Once your `Procfile` is created, be sure to add and commit it to your local repo. Your local repo should now be ready
-deploy to Heroku:
-
-```
-$ git push heroku main
-```
-
-(`main` refers to which branch of the remote Heroku repo we are pushing to. We'll learn about branches later 
-in the course, but for now, suffice it to say that you can only deploy to the `main` branch on Heroku.) This push will 
-create a running instance of your app at some URL ending with `herokuapp.com`. Enter that URL in a new browser tab 
-to see your app running live. Congratulations, you did it -- your app is live!
-
-When you are done being impressed with your deployment, be sure to stop and delete the deployed app.  You don't want 
-to incur charges to keep running the app!  (The rough cost of a Dyno for a month, without a database attached, is only
-$7.)
+When you are done being impressed with your deployment, be sure to spin down the deployed app. The button to do so is on the deployment page. You may also benefit from playing with the Osiris 
+interface to get comfortable with the features.
 
 ## Summary
 
@@ -342,7 +297,7 @@ $7.)
 actually in use.
 
 * You created a Sinatra app in the file `app.rb`, pointed Rack at this file in `config.ru`, and used `rackup` to start 
-the appserver and the `webrick` web server.
+the app server and the `webrick` web server.
 
 * You learned that changing the app's code does not automatically cause `rack` to reload the app. To save the work of
 restarting the app manually every time you make a change, you used the `rerun` gem, adding it to the `Gemfile` in a way 
@@ -351,7 +306,7 @@ that specifies you won't need it in production, only during development.
 * You versioned the important files containing not only your app's code but the necessary info to reproduce all the 
 libraries it relies on and the file that starts up the app.
 
-* You deployed this simple app to Heroku.
+* You deployed this simple app to Osiris.
 
 -----
 
