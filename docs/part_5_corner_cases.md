@@ -11,7 +11,7 @@ By now you should be familiar with the cycle:
 
 Use this process to develop the code for the remaining actions `win` and `lose`.  You will need to add code to the `show` action that checks whether the game state it is about to show is actually a winning or losing state, and if so, it should redirect to the appropriate `win` or `lose` action.  Recall that your game logic model has a method for testing if the current game state is win, lose, or keep playing. The scenario `game_over.feature` tests these behaviors in your SaaS app.
 
-Push to Heroku and make sure everything still works.  Give yourself a break and play a few rounds of wordguesser.
+Push to Osiris and make sure everything still works.  Give yourself a break and play a few rounds of wordguesser.
 
 While you're playing, what happens if you directly add `/win` to the end of your app's URL?  Make sure the player cannot cheat by simply visiting `GET /win`.  Consider how to modify the actions for `win`, `lose`, and `show` to prevent this behavior.
 
@@ -19,12 +19,12 @@ While you're playing, what happens if you directly add `/win` to the end of your
 
 Submission Instructions
 -----------------------
-When all scenarios are passing, deploy to Heroku and submit the URL of your deployed game in a file named `sinatra-url.txt`. 
+When all scenarios are passing, deploy to Osiris and submit the URL of your deployed game in a file named `sinatra-url.txt`. 
 
 You can create your text file using the `echo` command like this:
 
 ```
-echo 'my-app-12345.herokuapp.com' > sinatra-url.txt
+echo 'https://pd80-chip37-csuy4513.deploy.osiris.cyber.nyu.edu/' > sinatra-url.txt
 ```
 
 If you run the `cat` command after creating the file like this:
@@ -36,19 +36,17 @@ cat sinatra-url.txt
 then the output should look like this:
 
 ```
-my-app-12345.herokuapp.com
+https://pd80-chip37-csuy4513.deploy.osiris.cyber.nyu.edu/
 ```
 
-You would of course change 'my-app-12345' to match your Heroku URL.
+You would of course change 'pd80-chip37-csuy4513' to match your Osiris URL.
 
 Lastly, visit the same URL that you put into the text file with your web browser to be sure that your app is running 
 correctly at that address. 
 
 To "submit" your file, commit the `sinatra-url.txt` file to the top level directory of your repo. Push the repo to 
-GitHub, and submit the repo to Gradescope. Of course, leave the Heroku app running until grading is complete. Once the
-grade is set, you can disable the application on Heroku.  Consider not deleting the app on Heroku, so that if it needs
-to be running again for any reason (regrading, discussion with the CA, who knows...) you can just light it up again 
-rather than redeploying it.
+GitHub, and submit the repo to Gradescope. Of course, leave the Osiris app running until grading is complete. Once the
+grade is set, you can disable the application on Osiris.
 
 -----
 
