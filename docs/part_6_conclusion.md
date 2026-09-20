@@ -10,4 +10,4 @@ This assignment has served as a microcosm or miniature tour of the entire course
 
 * *Refactoring* means modifying the structure of your code to improve its quality (maintainability, readability, modifiability) while preserving its behavior.  We will learn to identify *antipatterns* -- warning signs of deteriorating quality in your code -- and opportunities to fix them, sometimes by applying *design patterns* that have emerged as "templates" capturing an effective solution to a class of similar problems. 
 
------
+-----  

@@ -1,7 +1,9 @@
 # CHIP 3.7: Wordguesser: a scaffolded (!) ESaaS getting-started assignment
 
 (v1.1, September 2015.  Written by Armando Fox and Nick Herson)
-(some edits by mverdicchio 21 September 2015)(refinements by Armando Fox, September 2017)(modified by Peter DePasquale, February 2026 and September 2026)
+(some edits by mverdicchio 21 September 2015)
+(refinements by Armando Fox, September 2017)
+(modified by Peter DePasquale, February 2026)
 
 In this assignment, you'll be introduced to part of the basic cycle of creating SaaS in a disciplined way.
 
@@ -34,7 +36,7 @@ In this introductory assignment, we've provided [RSpec](https://rspec.info/) uni
 
 You'll then use the Sinatra framework to make the Wordguesser game available as SaaS. Adapting the game logic for SaaS will introduce you to thinking about RESTful routes and service-oriented architecture. As you develop the "SaaS-ified" Wordguessing game, you'll use Cucumber to describe how gameplay will work from the player's point of view and as "full stack" integration tests that will drive SaaS development.  In the full Agile/XP cycle, you'd develop Cucumber scenarios yourself based on consultation with the customer, and create the necessary *step definitions* (Cucumber code that turns plain-English scenarios into runnable tests). In this assignment, we provide both the scenarios and step definitions for you.
 
-You'll deploy your game to the cloud using [Osiris's Orchestrator](https://deploy.osiris.cyber.nyu.edu/), giving you experience in automating SaaS deployment.
+You'll deploy your game to the cloud using [Heroku](https://www.heroku.com/), giving you experience in automating SaaS deployment.
 
 **Why Sinatra?**
 

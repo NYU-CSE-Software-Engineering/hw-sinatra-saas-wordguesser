@@ -5,7 +5,7 @@ Part 0: Demystifying SaaS app creation
 depends on so that your production and development environments are as similar as possible.
 
 **What you will do:** Create a simple "hello world" app using the Sinatra framework, version it properly, and deploy 
-it to Osiris.
+it to Heroku.
 
 ## Creating and versioning a simple SaaS app
 
@@ -259,35 +259,55 @@ the server to restart automatically, similar to the use of `guard` to auto-rerun
 Modify `app.rb` to print a different message, and verify that the change is detected by refreshing your browser 
 tab with the running app.  Also, before we move on, you should commit your latest changes to git.
 
-## Create a GitHub repository
-We're now at a point where we can/should put our project on GitHub. We should be in a "clean" state, where all of our recent changes are committed, and we have a working application (though it does not do much). Follow [these GitHub directions to create a new repository](https://docs.github.com/en/migrations/importing-source-code/using-the-command-line-to-import-source-code/adding-locally-hosted-code-to-github#adding-a-local-repository-to-github-using-git) on GitHub, and then push your code to that new repository. Be sure to create your repository as **private** when creating it.
+## Deploy to Heroku
 
-## Create a GitHub Personal Access Token
-You also need to create a GitHub (fine-grained) Personal Access Token for Osiris to be able to read from your private repository. Osiris won't need your GitHub password, so the token will provide access to the repo for deployment. Follow [these GitHub directions to create a new fine-grained personal access token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens). Be sure to only grant token access to your new repo, and add just the `Contents` permission (read-only).
+Heroku is a cloud [platform-as-a-service](https://en.wikipedia.org/wiki/Platform_as_a_service) (PaaS) where we can deploy our Sinatra (and later Rails) applications. 
+If you don't have an account yet, go sign up at http://www.heroku.com. You'll need your login and password for the 
+next step.
 
-> [!WARNING]
-> Personal access tokens, when combined with repository URLs, act as passwords. Never share your token!
+Install Heroku CLI on your host computer (not in the Docker container!) following their [instructions](https://devcenter.heroku.com/articles/heroku-cli).
 
-## Deploy to Osiris
-The Offensive Security, Incident Response, and Internet Security (OSIRIS) laboratory is a student-run cybersecurity research lab where students analyze and understand how attackers take advantage of real systems.[^1] The Osiris team has developed a deployment platform (a Platform-as-a-Service, or PaaS) system to support our deployment and execution of our web applications. In order to deploy, you will need to:
+Log in to your Heroku account by typing the command: `heroku login -i` in the terminal. This will connect you to your 
+Heroku account.  (**Note: if your Heroku account has multifactor authentication enabled, use the Heroku Account settings
+to generate an API key. You can then use this key as your password when you log in.**)
 
-1. Ensure you have logged in to a web browser using your NYU credentials, and then have visited the following site: [https://deploy.osiris.cyber.nyu.edu/](https://deploy.osiris.cyber.nyu.edu/)
-2. When prompted, enter the Join Code provided by your instructor to ensure that you join the correct "course" in Osiris
-3. Select the *Deploy* menu item from the top navigation bar. You should see:
-   ![Screenshot of the Osiris deployment window.](osiris_deploy.png)
-4. Select your course and assignment.
-5. Leave the git ref as `main` (that's the name of the git branch you wish to deploy), and change the port number to 3000.
-6. Enter the URL of the GitHub repo that you just created above. Note that as a private repo, you will need to generate a GitHub Personal Access Token for Osiris to access your private repo.
-Public repos do not require a token. Be sure to enter the URL of the private repo with the token preceding the `github.com` part.  For example: `https://github_personal_token@github.com:/github_username/github_reponame`
-7. Finally, hit the *Build and Deploy* button and see what happens. If all goes well, in a few minutes or less, you will see a URL that you can use in a web browser to access your web application.
-8. If this did not work or there were issues, check your work and possibly get help from the course staff.
+While in the root directory of your project (not your whole workspace), type `heroku create` to create a new project in 
+Heroku. This will tell the Heroku service to prepare for some incoming code, and locally it will add a remote git 
+repository for you called `heroku`.
 
-[^1]:See [https://osiris.cyber.nyu.edu/](https://osiris.cyber.nyu.edu/)
+Next, make sure you stage and commit all changes locally as instructed above (i.e., `git add`, `git commit`, etc.).
 
-Enter that URL in a new browser tab to see your app running live. Congratulations, you did it—your app is live!
+Earlier, we saw that to run the app locally you run `rackup` to start the Rack appserver, and Rack looks in `config.ru` 
+to determine how to start your Sinatra app. How do you tell a production environment how to start an appserver or 
+other processes necessary to receive requests and start your app? In the case of Heroku, this is done with a special 
+file named `Procfile`, which specifies one or more types of Heroku processes your app will use, and how to start each 
+one. The most basic Heroku process type is called a Dyno, or "web worker". One Dyno can serve one user request at a 
+time. Let's create a file named `Procfile`, and only this as the name (i.e. `Procfile.txt` is not valid). Write the 
+following line in your `Procfile`:
 
-When you are done being impressed with your deployment, be sure to spin down the deployed app. The button to do so is on the deployment page. You may also benefit from playing with the Osiris 
-interface to get comfortable with the features.
+```
+web: bundle exec rackup config.ru -p $PORT
+```
+
+This tells Heroku to start a single web worker (Dyno) using essentially the same command line you used to start 
+Rack locally. Note that in some cases, a `Procfile` is not necessary since Heroku can infer from your files how to 
+start the app. However, it's always better to be explicit.
+
+Once your `Procfile` is created, be sure to add and commit it to your local repo. Your local repo should now be ready
+deploy to Heroku:
+
+```
+$ git push heroku main
+```
+
+(`main` refers to which branch of the remote Heroku repo we are pushing to. We'll learn about branches later 
+in the course, but for now, suffice it to say that you can only deploy to the `main` branch on Heroku.) This push will 
+create a running instance of your app at some URL ending with `herokuapp.com`. Enter that URL in a new browser tab 
+to see your app running live. Congratulations, you did it -- your app is live!
+
+When you are done being impressed with your deployment, be sure to stop and delete the deployed app.  You don't want 
+to incur charges to keep running the app!  (The rough cost of a Dyno for a month, without a database attached, is only
+$7.)
 
 ## Summary
 
@@ -305,7 +325,7 @@ that specifies you won't need it in production, only during development.
 * You versioned the important files containing not only your app's code but the necessary info to reproduce all the 
 libraries it relies on and the file that starts up the app.
 
-* You deployed this simple app to Osiris.
+* You deployed this simple app to Heroku.
 
 -----
 
