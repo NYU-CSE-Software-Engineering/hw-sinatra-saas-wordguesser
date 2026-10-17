@@ -1,6 +1,8 @@
 services:
   web:
     build: .
+    dns:
+      - 8.8.8.8
     volumes:
       - .:/app
     ports:

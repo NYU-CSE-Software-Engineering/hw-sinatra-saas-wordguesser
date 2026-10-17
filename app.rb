@@ -3,17 +3,27 @@ require 'sinatra/flash'
 require_relative 'lib/wordguesser_game'
 
 class WordGuesserApp < Sinatra::Base
+  set :session_secret, ENV.fetch('SESSION_SECRET'){
+    'wordguesser-local-development-secret-2026-keep-this-stable-123456789'
+  }
+
   enable :sessions
   register Sinatra::Flash
 
-  set :host_authorization, { permitted_hosts: [] }  
+  set :host_authorization, { permitted_hosts: [] }
 
   before do
-    @game = session[:game] || WordGuesserGame.new('')
+    state = session[:game]
+    @game = if state.is_a?(Hash) && (state[:word] || state['word'])
+              WordGuesserGame.from_session(session[:game])
+            else
+              WordGuesserGame.new('')
+            end
   end
 
+
   after do
-    session[:game] = @game
+    session[:game] = @game.to_session if @game
   end
 
   # These two routes are good examples of Sinatra syntax
@@ -39,8 +49,13 @@ class WordGuesserApp < Sinatra::Base
   # If a guess is repeated, set flash[:message] to "You have already used that letter."
   # If a guess is invalid, set flash[:message] to "Invalid guess."
   post '/guess' do
-    params[:guess].to_s[0]
-    ### YOUR CODE HERE ###
+    letter=params[:guess].to_s[0]
+    begin
+      valid=@game.guess(letter)
+      flash[:message]="You have already used that letter." if valid == false
+    rescue ArgumentError
+      flash[:message]="Invalid guess."
+    end
     redirect '/show'
   end
 
@@ -50,17 +65,23 @@ class WordGuesserApp < Sinatra::Base
   # Notice that the show.erb template expects to use the instance variables
   # wrong_guesses and word_with_guesses from @game.
   get '/show' do
-    ### YOUR CODE HERE ###
-    erb :show # You may change/remove this line
+    case @game.check_win_or_lose
+    when :win
+      redirect '/win'
+    when :lose
+      redirect '/lose'
+    else
+      erb :show # You may change/remove this line
+    end
   end
 
   get '/win' do
-    ### YOUR CODE HERE ###
+    redirect '/show' unless @game.check_win_or_lose == :win
     erb :win # You may change/remove this line
   end
 
   get '/lose' do
-    ### YOUR CODE HERE ###
+    redirect '/show' unless @game.check_win_or_lose == :lose
     erb :lose # You may change/remove this line
   end
 end
